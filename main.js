@@ -1,8 +1,10 @@
 
 
-let item = document.getElementsByClassName("list-group-item");
-item[2].style.backgroundColor = "green";
+//let list = document.getElementsByClassName('list-group-item')
 
-for (let i = 0; i < item.length; i++) {
-    item[i].style.fontWeight = 'bold';
+let list = document.getElementsByTagName('li')
+
+
+for (let i = 0; i < list.length; i++) {
+    list[i].style.backgroundColor = 'red';
 }
