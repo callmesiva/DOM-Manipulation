@@ -34,8 +34,8 @@ function addItem(e) {
 
     let dis = document.createElement('input');
     dis.className = 'disclass';
-    dis.idName = 'dis'
-    dis.appendChild(document.createTextNode(newDis));
+    dis.idName = 'dis';
+    dis.value = newDis;
     li.appendChild(dis);
 
 
@@ -43,12 +43,6 @@ function addItem(e) {
 
 
 }
-
-
-
-
-
-
 
 
 
@@ -62,33 +56,25 @@ function removeItem(e) {
     }
 }
 
+
 function filteritem(e) {
     let text = e.target.value.toLowerCase();
     let items = document.getElementsByTagName('li');
 
-
-    let clsValue = document.getElementsByClassName("disclass")
-
-    Array.from(clsValue).forEach(function (cls) {
-        let itemsname = cls.value;
-
-        if (itemsname.toLowerCase().indexOf(text) != -1) {
-            cls.style.display = 'block';
-        }
-        else {
-            cls.style.display = 'none';
-        }
-
-    })
+    let clsval = document.getElementsByClassName('disclass')
 
 
     Array.from(items).forEach(function (item) {
-        let itemsname = item.firstChild.textContent;
 
-        if (itemsname.toLowerCase().indexOf(text) != -1) {
+        let itemsname = item.firstChild.textContent;
+        let clsval = item.lastElementChild.value;
+        console.log(clsval)
+
+        if (itemsname.toLowerCase().indexOf(text) != -1 || clsval.toLowerCase().indexOf(text) != -1) {
             item.style.display = 'block'
         }
         else {
+
             item.style.display = 'none';
         }
 
