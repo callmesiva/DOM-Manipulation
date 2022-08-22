@@ -1,33 +1,57 @@
 let form = document.getElementById('addForm');
 let itemlist = document.getElementById('items');
+let filter = document.getElementById('filter');
 
 form.addEventListener('submit', addItem);
 
 itemlist.addEventListener('click', removeItem);
 
+filter.addEventListener('keyup', filteritem)
+
+
+
 
 function addItem(e) {
     e.preventDefault();
-    var newItem = document.getElementById('item').value;
+    let newItem = document.getElementById('item').value;
+    let newDis = document.getElementById('discription1').value;
+
 
     let li = document.createElement('li');
     li.className = 'list-group-item';
     li.appendChild(document.createTextNode(newItem));
+
     var deletebtn = document.createElement('button');
     deletebtn.className = 'btn btn-danger btn-sm float-right delete';
-    deletebtn.appendChild(document.createTextNode('X'));
+    deletebtn.appendChild(document.createTextNode('Delete'));
     li.appendChild(deletebtn);
 
     var editbtn = document.createElement('button');
-    editbtn.className = 'btn btn-secondary btn-sm float-right delete';
-    editbtn.appendChild(document.createTextNode('E'));
+    editbtn.className = 'btn btn-secondary btn-sm float-right';
+    editbtn.idName = "bttn";
+    editbtn.appendChild(document.createTextNode('Edit'));
     li.appendChild(editbtn);
 
-
+    let dis = document.createElement('input');
+    dis.className = 'disclass';
+    dis.idName = 'dis'
+    dis.appendChild(document.createTextNode(newDis));
+    li.appendChild(dis);
 
 
     itemlist.appendChild(li);
+
+
 }
+
+
+
+
+
+
+
+
+
 
 function removeItem(e) {
     if (e.target.classList.contains('delete')) {
@@ -36,4 +60,40 @@ function removeItem(e) {
             itemlist.removeChild(li);
         }
     }
+}
+
+function filteritem(e) {
+    let text = e.target.value.toLowerCase();
+    let items = document.getElementsByTagName('li');
+
+
+    let clsValue = document.getElementsByClassName("disclass")
+
+    Array.from(clsValue).forEach(function (cls) {
+        let itemsname = cls.value;
+
+        if (itemsname.toLowerCase().indexOf(text) != -1) {
+            cls.style.display = 'block';
+        }
+        else {
+            cls.style.display = 'none';
+        }
+
+    })
+
+
+    Array.from(items).forEach(function (item) {
+        let itemsname = item.firstChild.textContent;
+
+        if (itemsname.toLowerCase().indexOf(text) != -1) {
+            item.style.display = 'block'
+        }
+        else {
+            item.style.display = 'none';
+        }
+
+    })
+
+
+
 }
